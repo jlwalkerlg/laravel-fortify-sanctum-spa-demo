@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/home', env('BACKEND_URL'));
+Route::get('/password-reset', fn (Request $request) => redirect(env('BACKEND_URL') . '/password-reset?' . $request->getQueryString()))->name('password.reset');
