@@ -49,6 +49,14 @@ const LoginPage: FC = () => {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Sign in to your account
             </h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Or{" "}
+              <Link href="/register">
+                <a className="font-medium text-red-600 hover:text-red-500">
+                  sign up for a new account
+                </a>
+              </Link>
+            </p>
           </div>
           <form
             className="mt-8 p-8 shadow bg-white rounded-lg"
@@ -129,15 +137,6 @@ const LoginPage: FC = () => {
               >
                 Sign in
               </button>
-            </div>
-
-            <div className="mt-6 text-sm text-center">
-              Need an account?{" "}
-              <Link href="/register">
-                <a className="font-medium text-red-600 hover:text-red-500">
-                  Sign up
-                </a>
-              </Link>
             </div>
           </form>
         </div>
