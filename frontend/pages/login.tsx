@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import React, { FC, useState } from "react";
 import api from "../api";
-import Layout, { LayoutHeader, LayoutMain } from "../components/Layout";
 
 const LoginPage: FC = () => {
   const [email, setEmail] = useState("");
@@ -11,18 +10,14 @@ const LoginPage: FC = () => {
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<Record<string, string[]>>({});
 
-  const onLogin = async () => {
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setError("");
     setErrors({});
 
     try {
       await api.get("/sanctum/csrf-cookie");
-    } catch (e) {
-      setError(e.response?.data?.message ?? e.message);
-      return;
-    }
-
-    try {
       await api.post("/login", {
         email,
         password,
@@ -35,51 +30,119 @@ const LoginPage: FC = () => {
   };
 
   return (
-    <Layout>
+    <div>
       <Head>
         <title>Login | WinFCU</title>
         <meta name="description" content="Login | WinFCU" />
       </Head>
 
-      <LayoutHeader>Login</LayoutHeader>
+      <h1 className="sr-only">Login</h1>
 
-      <LayoutMain>
-        <div>
-          {error && <div>{error}</div>}
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
           <div>
-            <label>Email</label>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+            <img
+              className="mx-auto h-12 w-auto"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              alt="Workflow"
             />
-            {errors.email && <small>{errors.email}</small>}
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              Sign in to your account
+            </h2>
           </div>
-          <div>
-            <label>Password</label>
-            <input
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && <small>{errors.password}</small>}
-          </div>
-          <div>
-            <label>Remember me</label>
-            <input type="checkbox" />
-          </div>
-          <div>
-            <button onClick={onLogin}>Login</button>
-          </div>
-        </div>
+          <form
+            className="mt-8 p-8 shadow bg-white rounded-lg"
+            action="#"
+            method="POST"
+            onSubmit={onLogin}
+          >
+            <input type="hidden" name="remember" defaultValue="true" />
+            <div>
+              <div>
+                <label
+                  htmlFor="emailAddress"
+                  className="font-medium text-gray-600 text-sm"
+                >
+                  Email address
+                </label>
+                <input
+                  id="emailAddress"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-1"
+                  placeholder="Email address"
+                />
+              </div>
+              <div className="mt-6">
+                <label
+                  htmlFor="password"
+                  className="font-medium text-gray-600 text-sm"
+                >
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-red-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-1"
+                  placeholder="Password"
+                />
+                <span className="text-xs text-red-500">
+                  Must be at least 8 characters long.
+                </span>
+              </div>
+            </div>
 
-        <div>
-          <Link href="/forgot-password">
-            <a>Forgot password?</a>
-          </Link>
+            <div className="flex items-center justify-between mt-6">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-200 rounded"
+                />
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-900"
+                >
+                  Remember me
+                </label>
+              </div>
+
+              <div className="text-sm">
+                <Link href="/forgot-password">
+                  <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                    Forgot your password?
+                  </a>
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Sign in
+              </button>
+            </div>
+
+            <div className="mt-6 text-sm text-center">
+              Need an account?{" "}
+              <Link href="/register">
+                <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                  Sign up
+                </a>
+              </Link>
+            </div>
+          </form>
         </div>
-      </LayoutMain>
-    </Layout>
+      </div>
+    </div>
   );
 };
 
