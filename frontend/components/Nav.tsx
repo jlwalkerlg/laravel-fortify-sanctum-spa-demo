@@ -1,48 +1,13 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, Fragment, useRef, useState } from "react";
 import api from "../api";
 
 const NavLink: FC<{ href: string }> = ({ href, children }) => {
-  const router = useRouter();
-
-  if (router.pathname === href) {
-    return (
-      <Link href={href}>
-        <a className="px-3 py-2 rounded-md text-sm font-medium bg-gray-900 text-white">
-          {children}
-        </a>
-      </Link>
-    );
-  }
-
   return (
     <Link href={href}>
-      <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-        {children}
-      </a>
-    </Link>
-  );
-};
-
-const NavLinkMobile: FC<{ href: string }> = ({ href, children }) => {
-  const router = useRouter();
-
-  if (router.pathname === href) {
-    return (
-      <Link href={href}>
-        <a className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">
-          {children}
-        </a>
-      </Link>
-    );
-  }
-
-  return (
-    <Link href={href}>
-      <a className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+      <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white">
         {children}
       </a>
     </Link>
@@ -67,7 +32,7 @@ const Nav: FC = () => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-300">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,9 +42,9 @@ const Nav: FC = () => {
                   <Link href="/">
                     <a>
                       <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                        alt="Workflow"
+                        className="h-10"
+                        src="https://a2l.marstair.com/img/logo.svg"
+                        alt="Marstair"
                       />
                     </a>
                   </Link>
@@ -87,8 +52,16 @@ const Nav: FC = () => {
                 {isAuthenticated && (
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      <NavLink href="/dashboard">Dashboard</NavLink>
-                      <NavLink href="/projects">Projects</NavLink>
+                      <Link href="/dashboard">
+                        <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white">
+                          Dashboard
+                        </a>
+                      </Link>
+                      <Link href="/projects">
+                        <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white">
+                          Projects
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -100,10 +73,10 @@ const Nav: FC = () => {
                       {({ open }) => (
                         <>
                           <div>
-                            <Menu.Button className="max-w-xs bg-gray-800 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            <Menu.Button className="max-w-xs rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-800 focus:ring-white">
                               <span className="sr-only">Open user menu</span>
 
-                              <span className="rounded-full px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center">
+                              <span className="rounded-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white flex items-center">
                                 walker.jlg@gmail.com
                                 <ChevronDownIcon className="w-4 h-4 ml-2 stroke-current" />
                               </span>
@@ -126,12 +99,7 @@ const Nav: FC = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <Link href="/profile">
-                                    <a
-                                      className={
-                                        (active ? "bg-gray-100 " : "") +
-                                        "block px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                                      }
-                                    >
+                                    <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-700 hover:text-white">
                                       Your profile
                                     </a>
                                   </Link>
@@ -141,7 +109,7 @@ const Nav: FC = () => {
                                 {() => (
                                   <button
                                     onClick={onLogout}
-                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-700 hover:text-white"
                                   >
                                     Sign out
                                   </button>
@@ -158,10 +126,9 @@ const Nav: FC = () => {
                 </div>
               </div>
               <div className="-mr-2 flex md:hidden">
-                {/* Mobile menu button */}
                 <Disclosure.Button
                   ref={mobileMenuButtonRef}
-                  className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  className="text-red-700 hover:text-red-700 inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-800 focus:ring-white"
                 >
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -174,12 +141,20 @@ const Nav: FC = () => {
             </div>
           </div>
 
-          <Disclosure.Panel className="md:hidden">
+          <Disclosure.Panel className="md:hidden bg-gray-700">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <NavLinkMobile href="/dashboard">Dashboard</NavLinkMobile>
-              <NavLinkMobile href="/projects">Projects</NavLinkMobile>
+              <Link href="/dashboard">
+                <a className="text-gray-300 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                  Dashboard
+                </a>
+              </Link>
+              <Link href="/projects">
+                <a className="text-gray-300 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                  Projects
+                </a>
+              </Link>
             </div>
-            <div className="pt-4 pb-3 border-t border-gray-700">
+            <div className="pt-4 pb-3 border-t border-gray-300">
               {isAuthenticated ? (
                 <>
                   <div className="flex items-center px-5">
@@ -189,13 +164,13 @@ const Nav: FC = () => {
                   </div>
                   <div className="mt-3 px-2 space-y-1">
                     <Link href="/profile">
-                      <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                      <a className="text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                         Your profile
                       </a>
                     </Link>
                     <button
                       onClick={onLogout}
-                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                      className="w-full text-left text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       Sign out
                     </button>
@@ -204,7 +179,7 @@ const Nav: FC = () => {
               ) : (
                 <div className="px-2 space-y-1">
                   <Link href="/login">
-                    <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                    <a className="text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                       Sign in
                     </a>
                   </Link>
