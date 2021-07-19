@@ -1,50 +1,35 @@
 import Head from "next/head";
-import Link from "next/link";
 import React, { FC } from "react";
-import api from "../api";
+import Nav from "./Nav";
+
+export const LayoutHeader: FC = ({ children }) => {
+  return (
+    <header className="bg-white shadow">
+      <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold text-gray-900">{children}</h1>
+      </div>
+    </header>
+  );
+};
+
+export const LayoutMain: FC = ({ children }) => {
+  return (
+    <main>
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">{children}</div>
+    </main>
+  );
+};
 
 const Layout: FC = ({ children }) => {
-  const onLogout = async () => {
-    try {
-      await api.post("/logout");
-    } catch (e) {
-      return;
-    }
-  };
-
   return (
     <div>
       <Head>
-        <title>Laravel Fortify Sanctum SPA Demo</title>
-        <meta name="description" content="Laravel Fortify Sanctum SPA Demo" />
+        <title>WinFCU</title>
+        <meta name="description" content="WinFCU" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ul>
-        <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/account">
-            <a>Account</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/register">
-            <a>Register</a>
-          </Link>
-        </li>
-        <li>
-          <button onClick={onLogout}>Logout</button>
-        </li>
-      </ul>
+      <Nav />
 
       {children}
     </div>

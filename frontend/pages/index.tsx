@@ -1,8 +1,22 @@
+import Head from "next/head";
 import React, { FC } from "react";
-import Layout from "../components/Layout";
+import Layout, { LayoutHeader, LayoutMain } from "../components/Layout";
 
-const index: FC = () => {
-  return <Layout />;
+const HomePage: FC = () => {
+  return (
+    <Layout>
+      <Head>
+        <title>Home | WinFCU</title>
+        <meta name="description" content="Home | WinFCU" />
+      </Head>
+
+      <LayoutHeader>Home</LayoutHeader>
+
+      <LayoutMain>
+        <div>You&apos;ve got everything now!</div>
+      </LayoutMain>
+    </Layout>
+  );
 };
 
-export default index;
+export default HomePage;
