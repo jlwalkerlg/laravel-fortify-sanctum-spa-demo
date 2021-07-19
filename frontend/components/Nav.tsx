@@ -53,12 +53,12 @@ const Nav: FC = () => {
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       <Link href="/dashboard">
-                        <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white">
+                        <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white uppercase">
                           Dashboard
                         </a>
                       </Link>
                       <Link href="/projects">
-                        <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white">
+                        <a className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-red-700 hover:text-white uppercase">
                           Projects
                         </a>
                       </Link>
@@ -99,7 +99,7 @@ const Nav: FC = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <Link href="/profile">
-                                    <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-700 hover:text-white">
+                                    <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-700 hover:text-white uppercase">
                                       Your profile
                                     </a>
                                   </Link>
@@ -109,7 +109,7 @@ const Nav: FC = () => {
                                 {() => (
                                   <button
                                     onClick={onLogout}
-                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-700 hover:text-white"
+                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-700 hover:text-white uppercase"
                                   >
                                     Sign out
                                   </button>
@@ -144,12 +144,12 @@ const Nav: FC = () => {
           <Disclosure.Panel className="md:hidden bg-gray-700">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link href="/dashboard">
-                <a className="text-gray-300 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                <a className="text-gray-300 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase">
                   Dashboard
                 </a>
               </Link>
               <Link href="/projects">
-                <a className="text-gray-300 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                <a className="text-gray-300 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase">
                   Projects
                 </a>
               </Link>
@@ -164,13 +164,13 @@ const Nav: FC = () => {
                   </div>
                   <div className="mt-3 px-2 space-y-1">
                     <Link href="/profile">
-                      <a className="text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                      <a className="text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase">
                         Your profile
                       </a>
                     </Link>
                     <button
                       onClick={onLogout}
-                      className="w-full text-left text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      className="w-full text-left text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase"
                     >
                       Sign out
                     </button>
@@ -179,7 +179,7 @@ const Nav: FC = () => {
               ) : (
                 <div className="px-2 space-y-1">
                   <Link href="/login">
-                    <a className="text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    <a className="text-gray-400 hover:bg-gray-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase">
                       Sign in
                     </a>
                   </Link>
